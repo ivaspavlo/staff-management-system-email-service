@@ -1,0 +1,8 @@
+{
+    "name"        : "itrexio-back-my",
+    "script"      : "./index.js",
+    "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV":"development"
+    }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+    <title>ITRex Group</title>
+</head>
+<body style="background: url('https://storage.itrex.io/email-assets/white-triangle.png'); font-family: 'Open Sans', sans-serif; font-weight: 400; line-height: 1.45; color: #333;">
+<div style="overflow: hidden;">
+<div style="min-height: 100%; max-width: 600px; margin: 20px auto; box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.3); background-color: #fff;">
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td background="https://storage.itrex.io/email-assets/background-new-half.png" bgcolor="#ffffff" valign="top">
+                <!--[if gte mso 9]>
+                <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;">
+                    <v:fill type="tile" src="https://storage.itrex.io/email-assets/background-new-half.png" color="#ffffff" />
+                    <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+                <![endif]-->
+                <div>
+                    <nav style="border-bottom: 1px solid #0e75bb; clear:both; overflow: hidden;">
+                        <div style="margin-left: auto; margin-right: auto;">
+                            <a style="width:200px; margin:0 auto; margin-top:20px; margin-bottom:20px; display: block;" href="http://itrexgroup.com/">
+                                <img style="width:200px;" src="https://storage.itrex.io/email-assets/logo-watermark.png?1" />
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+                <!--[if gte mso 9]>
+                </v:textbox>
+                </v:rect>
+                <![endif]-->
+            </td>
+        </tr>
+    </table>
+
+    <div style="border-bottom: 1px solid #B0B9C7; padding: 10px 0;border-left: 1px solid #789ee9;border-right: 1px solid #789ee9;">
+        <div style="margin-left: auto; margin-right: auto; padding-left: 25px; padding-right: 25px;">
+            <div style="margin-bottom: 1.2rem; text-align: center;">
+                <span style="font-family: 'Open Sans', sans-serif; font-weight: 400; line-height: 1.45; font-size: 35px; display: block; color:#0e75bb;">Public Holidays Notice</span>
+            </div>
+            <div style="padding:0 20px;">
+                <div style="font-size: 22px; font-weight: bold; margin:10px 0">Hi<% if (typeof user != 'undefined' && user.firstName) { %> <%= user.firstName %><% } %>,</div>
+                <div style="margin-bottom:5px;">Hope you are fine and doing well. Please be informed about public holidays in ITRex Team in June, 2018:</div>
+
+                <% data.forEach(function(d) { %>
+                <div style="font-size: 18px; font-weight: bold; margin:10px 0; text-align: left;"><img width="25px" src="<%= d.countryImage %>" /> <%= d.country.name %></div>
+                <table style="width: 100%; border:0; border-collapse: collapse; border-spacing: 0;">
+                <% d.dates.forEach(function(date) { %>
+                    <tr>
+                        <td style="text-align: left; padding:2px; border:0;">-</td>
+                        <td style="text-align: left; padding:2px; border:0;"><span style="font-weight: bold; color:#f44"><%= date.day %></span> (<%= date.dayOfWeek %>)</td>
+                        <% if (date.shiftedDay) { %>
+                        <td style="text-align: left; padding:2px; border:0;">shifted to</td>
+                        <td style="text-align: left; padding:2px; border:0;"><span style="font-weight: bold; color:#75ab2b"><%= date.shiftedDay %></span> (<%= date.shiftedDayOfWeek %>)</td>
+                        <% } else { %>
+                        <td style="text-align: left; padding:2px; border:0;"></td>
+                        <td style="text-align: left; padding:2px; border:0;"></td>
+                        <% } %>
+                    </tr>
+                <% }) %>
+                </table>
+
+                <% if (d.team && d.team.length) { %>
+                <div style="font-size: 14px; margin-top:10px; text-align: left;">
+                    employees that will be not available during these holidays:
+                </div>
+                <ul>
+                <% d.team.forEach(function(t) { %>
+                    <li><%= t.employee.firstName %> <%= t.employee.lastName %> <span style="font-size: 14px; color:#0e75bb;">(<%= t.position.name %>)</span></li>
+                <% }); %>
+                </ul>
+                <% } %>
+                <hr />
+                <% }) %>
+                <div style="overflow: hidden;">
+                    <% calendars.forEach(function(calendar) { %>
+                    <table style="text-align: center; <% if (calendars.length == 1) { %>margin: 0 auto; <% } else { %>float: left; width: 50%; border-right: 1px solid #ccc;<% } %>">
+                        <tr>
+                            <td colspan="7" style="text-align: center; font-weight: bold; font-size: 22px; color: #0e75bb"><%= calendar.name %></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 5px; font-weight: bold;">Mo</td>
+                            <td style="padding: 5px; font-weight: bold;">Tu</td>
+                            <td style="padding: 5px; font-weight: bold;">We</td>
+                            <td style="padding: 5px; font-weight: bold;">Th</td>
+                            <td style="padding: 5px; font-weight: bold;">Fr</td>
+                            <td style="padding: 5px; font-weight: bold;">Sa</td>
+                            <td style="padding: 5px; font-weight: bold;">Su</td>
+                        </tr>
+
+                        <% calendar.weeks.forEach(function(week) { %>
+                        <tr>
+                            <% week.days.forEach(function(day) { %>
+                            <td <% if (day.background) { %>background="<%= day.background %>"<% } %> style="<%= day.style %>">
+                                <% if (day.labelWrapper) { %>
+                                <div style="<%= day.labelWrapper %>"><%= day.label %></div>
+                                <% } else { %>
+                                <%= day.label %>
+                                <% } %>
+                            </td>
+                            <% }) %>
+                        </tr>
+                        <% }) %>
+                    </table>
+                    <% }); %>
+                </div>
+                <div style="clear: both;">&nbsp;</div>
+                <hr />
+                <div style="margin-top: 20px;">Please let us know if you have any questions.</div>
+
+                <div style="margin:20px 0;">Thank you!</div>
+                <div style="padding:20px 0;">
+                    <div style="text-align: center;"><font size="1" style="color:rgb(102,102,102);font-family:arial,helvetica,sans-serif">Best Regards,</font></div>
+                    <div style="text-align: center;"><font size="1"><b>ITRex Team</b></font></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="display: block; padding: 7px 15px 1px 15px;border-left: 1px solid #789ee9;border-bottom: 1px solid #789ee9;border-right: 1px solid #789ee9;">
+        <div style="max-width: 55px; margin: auto; margin-bottom: 5px;" class="footer-logo">
+            <img width="100px" src="https://storage.itrex.io/email-assets/logo-footer.png?1" style="display: block; max-width: 100%; height: auto; margin: auto; vertical-align: middle;" alt=""/>
+        </div>
+        <p style="margin-bottom: 1.2rem; margin-top: 0; font-size: 0.7rem; color: #B0B9C7; text-align: center;">ITRex Group 2018</p>
+    </footer>
+</div>
+</div>
+</body>
+</html>
